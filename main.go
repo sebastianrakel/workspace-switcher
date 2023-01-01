@@ -192,6 +192,10 @@ func showRofi(cmd *cobra.Command, args []string) {
 func applyWorkspace(workspaceName string) {
 	workspace := config.Workspaces[workspaceName]
 
+	for _, hook := range config.Hooks.Deactivate {
+		executeString(hook)
+	}
+
 	deactivateDisplays()
 
 	workspace.ExecuteDisplayCommand()
