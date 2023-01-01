@@ -1,0 +1,34 @@
+---
+hooks:
+  activate:
+    - herbstclient reload
+  deactivate:
+    - pactl unload-module module-loopback
+aliases:
+  lower_left: DisplayPort-1
+  upper_left: DisplayPort-2
+  main: DisplayPort-0
+workspaces:
+  full:
+    displays:
+      main:
+        primary: true
+      lower_left:
+        order:
+          - display: main
+            position: left-of
+      upper_left:
+        order:
+          - display: lower_left
+            position: above
+  gaming:
+    displays:
+      lower_left:
+        primary: true
+      upper_left:
+        order:
+          - display: lower_left
+            position: above
+    hooks:
+      activate:
+        - pactl load-module module-loopback
