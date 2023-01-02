@@ -15,6 +15,7 @@ func executeString(command string) (string, error) {
 }
 
 func execute(command string, args []string, inputLines []string) (string, error) {
+	fmt.Printf("%s %s\n", command, strings.Join(args, " "))
 	cmd := exec.Command(command, args...)
 	cmd.Stderr = os.Stderr
 

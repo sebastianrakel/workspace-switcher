@@ -120,8 +120,25 @@ func GetDisplayName(nameOrAlias string) string {
 func (w *Workspace) ExecuteDisplayCommand() {
 	var displayBlocks []string
 
+	outputs := getOutputs()
+	used := make(map[string]bool)
+
+	for _, output := range outputs {
+		used[output] = false
+	}
+
 	for key, display := range w.Displays {
+		displayName := GetDisplayName(key)
+
+		used[displayName] = true
+
 		displayBlocks = append(displayBlocks, display.GetDisplayCommandBlock(key)...)
+	}
+
+	for key, value := range used {
+		if value == false {
+			displayBlocks = append(displayBlocks, "--output", key, "--off")
+		}
 	}
 
 	displayBlocks = append(displayBlocks, "--verbose")
@@ -137,8 +154,8 @@ func (d *Display) GetDisplayCommandBlock(displayName string) []string {
 		parts = append(parts, "--primary")
 	}
 
-	if d.Rotation != "" {
-		parts = append(parts, "--rotation", d.Rotation)
+	if d.Rotate != "" {
+		parts = append(parts, "--rotate", d.Rotate)
 	}
 
 	for _, order := range d.Order {
@@ -195,8 +212,6 @@ func applyWorkspace(workspaceName string) {
 	for _, hook := range config.Hooks.Deactivate {
 		executeString(hook)
 	}
-
-	deactivateDisplays()
 
 	workspace.ExecuteDisplayCommand()
 

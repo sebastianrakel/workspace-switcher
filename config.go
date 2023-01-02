@@ -14,7 +14,7 @@ type Hooks struct {
 type Display struct {
 	Resolution string `yaml:"resolution"`
 	Primary    bool   `yaml:"primary"`
-	Rotation   string `yaml:"rotation"`
+	Rotate     string `yaml:"rotate"`
 	Order      []struct {
 		Display  string `yaml:"display"`
 		Position string `yaml:"position"`
