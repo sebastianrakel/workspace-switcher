@@ -8,7 +8,7 @@ import (
 
 type Hooks struct {
 	Activate   []string `yaml:"activate"`
-	Deactivate []string `yaml:"deactivcate"`
+	Deactivate []string `yaml:"deactivate"`
 }
 
 type Display struct {
