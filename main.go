@@ -143,7 +143,7 @@ func (w *Workspace) ExecuteDisplayCommand() {
 
 	displayBlocks = append(displayBlocks, "--verbose")
 
-	execute("/usr/bin/xrandr", displayBlocks, nil)
+	execute("xrandr", displayBlocks, nil)
 }
 
 func (d *Display) GetDisplayCommandBlock(displayName string) []string {
@@ -175,7 +175,7 @@ func deactivateDisplays() {
 		args = append(args, "--output", output, "--off")
 	}
 
-	execute("/usr/bin/xrandr", args, nil)
+	execute("xrandr", args, nil)
 }
 
 func getOutputs() []string {
