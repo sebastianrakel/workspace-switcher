@@ -19,6 +19,11 @@ type Display struct {
 		Display  string `yaml:"display"`
 		Position string `yaml:"position"`
 	} `yaml:"order"`
+	Position struct {
+		UsePosition bool `yaml:"enable"`
+		X           int  `yaml:"x"`
+		Y           int  `yaml:"y"`
+	} `yaml:"position"`
 }
 
 type Workspace struct {

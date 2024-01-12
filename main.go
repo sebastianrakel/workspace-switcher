@@ -158,12 +158,18 @@ func (d *Display) GetDisplayCommandBlock(displayName string) []string {
 		parts = append(parts, "--rotate", d.Rotate)
 	}
 
-	for _, order := range d.Order {
-		parts = append(parts, fmt.Sprintf("--%s", order.Position), GetDisplayName(order.Display))
-	}
-
 	if d.Resolution == "" {
 		parts = append(parts, "--auto")
+	} else {
+		parts = append(parts, "--mode", d.Resolution)
+	}
+
+	if d.Position.UsePosition {
+		parts = append(parts, "--pos", fmt.Sprintf("%dx%d", d.Position.X, d.Position.Y))
+	} else {
+		for _, order := range d.Order {
+			parts = append(parts, fmt.Sprintf("--%s", order.Position), GetDisplayName(order.Display))
+		}
 	}
 
 	return parts
